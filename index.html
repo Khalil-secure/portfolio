@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khalil Ghiati — Infrastructure & Security Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c10;
+      --surface: #0d1117;
+      --surface2: #161b22;
+      --border: #21262d;
+      --green: #00ff88;
+      --green-dim: #00ff8820;
+      --green-mid: #00ff8855;
+      --amber: #ffa500;
+      --red: #ff4757;
+      --blue: #58a6ff;
+      --text: #e6edf3;
+      --muted: #7d8590;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid var(--green-mid);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease;
+      mix-blend-mode: screen;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; top:0;left:0;right:0;bottom:0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,136,0.012) 2px,rgba(0,255,136,0.012) 4px);
+      pointer-events: none; z-index: 100;
+    }
+    body::after {
+      content: '';
+      position: fixed; top:0;left:0;right:0;bottom:0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position: fixed; top:0;left:0;right:0;
+      z-index: 50;
+      padding: 1.1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,12,16,0.9);
+      backdrop-filter: blur(14px);
+    }
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--green);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--muted); font-weight: 400; }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-center a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-center a:hover { color: var(--green); }
+
+    .nav-right { display:flex; align-items:center; gap:1rem; }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      cursor: none;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--green);
+      color: var(--bg);
+      font-weight: 700;
+    }
+    .lang-btn:not(.active):hover { color: var(--green); background: var(--green-dim); }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    section { position:relative; z-index:1; }
+
+    /* ── HERO ─────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 4rem;
+    }
+    .hero-content { flex: 1; max-width: 680px; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-dim);
+      border: 1px solid var(--green-mid);
+      color: var(--green);
+      font-size: 0.68rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-name {
+      font-family: var(--font-sans);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-name .accent { color: var(--green); }
+
+    .hero-title {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-desc {
+      font-size: 0.88rem;
+      color: #8b949e;
+      line-height: 1.85;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+    .hero-badge {
+      font-size: 0.62rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: none;
+    }
+    .btn-primary { background: var(--green); color: var(--bg); font-weight: 700; border: 1px solid var(--green); }
+    .btn-primary:hover { background: transparent; color: var(--green); box-shadow: 0 0 24px var(--green-dim); }
+    .btn-outline { background: transparent; color: var(--green); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--green); box-shadow: 0 0 20px var(--green-dim); }
+
+    .hero-terminal {
+      flex-shrink: 0;
+      width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    @media (max-width: 1000px) { .hero-terminal { display: none; } }
+
+    .terminal-bar {
+      background: var(--surface2);
+      padding: 0.55rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .t-red { background: #ff5f57; }
+    .t-yellow { background: #febc2e; }
+    .t-green-dot { background: #28c840; }
+    .terminal-title { margin-left: 0.5rem; font-size: 0.68rem; color: var(--muted); }
+
+    .terminal-body { padding: 1rem 1.2rem; font-size: 0.7rem; line-height: 2; }
+    .t-prompt { color: var(--green); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--muted); }
+    .t-success { color: var(--green); }
+    .t-warn { color: var(--amber); }
+    .t-err { color: var(--red); }
+    .t-cursor { display:inline-block;width:8px;height:13px;background:var(--green);animation:blink 1s infinite;vertical-align:middle; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── ABOUT ────────────────────────────── */
+    #about {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) { #about { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .section-label {
+      font-size: 0.63rem;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::before { content:''; display:block;width:24px;height:1px;background:var(--green); }
+
+    .section-title {
+      font-family: var(--font-sans);
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text { color: #8b949e; font-size: 0.83rem; line-height: 1.95; margin-bottom: 1rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+    .stat { background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:4px;text-align:center; }
+    .stat-num { font-family:var(--font-sans);font-size:1.7rem;font-weight:800;color:var(--green);display:block; }
+    .stat-label { font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em; }
+
+    .focus-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      line-height: 2;
+    }
+    .focus-label { color:var(--muted);margin-bottom:1rem;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase; }
+    .focus-item { display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.2rem; }
+    .fi-green { color:var(--green); }
+    .fi-amber { color:var(--amber); }
+    .fi-blue { color:var(--blue); }
+
+    /* ── EXPERIENCE ───────────────────────── */
+    #experience {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .exp-timeline { margin-top: 2.5rem; display:flex; flex-direction:column; gap:1.5rem; }
+
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem 1.8rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-card::before {
+      content:''; position:absolute;left:0;top:0;bottom:0;width:3px;
+      background: var(--green); transform: scaleY(0); transform-origin:top;
+      transition: transform 0.3s;
+    }
+    .exp-card:hover { border-color: var(--green-mid); transform: translateX(4px); }
+    .exp-card:hover::before { transform: scaleY(1); }
+
+    .exp-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem; }
+    .exp-company { font-family:var(--font-sans);font-weight:700;font-size:1.05rem;color:var(--text); }
+    .exp-date { font-size:0.68rem;color:var(--muted);border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:2px;white-space:nowrap; }
+    .exp-role { color:var(--green);font-size:0.78rem;margin-bottom:0.3rem;letter-spacing:0.05em; }
+    .exp-location { color:var(--muted);font-size:0.7rem;margin-bottom:1rem; }
+
+    .exp-bullets { list-style:none;display:flex;flex-direction:column;gap:0.4rem; }
+    .exp-bullets li { font-size:0.78rem;color:#8b949e;line-height:1.7;padding-left:1.2rem;position:relative; }
+    .exp-bullets li::before { content:'▸';position:absolute;left:0;color:var(--green);font-size:0.65rem; }
+
+    .exp-tags { display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem; }
+    .etag {
+      background:var(--surface2);border:1px solid var(--border);
+      color:var(--muted);font-size:0.62rem;padding:0.18rem 0.5rem;
+      border-radius:2px;letter-spacing:0.05em;
+    }
+
+    /* ── SKILLS ───────────────────────────── */
+    #skills { padding: 6rem 3rem; max-width:1200px;margin:0 auto; }
+    .skills-header { margin-bottom:2.5rem; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:6px;padding:1.4rem;transition:all 0.3s;position:relative;overflow:hidden;
+    }
+    .skill-card::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+    }
+    .skill-card:hover { border-color:var(--green-mid);transform:translateY(-2px); }
+    .skill-card:hover::before { transform:scaleX(1); }
+
+    .skill-icon { font-size:1.4rem;margin-bottom:0.7rem; }
+    .skill-name { font-family:var(--font-sans);font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;color:var(--text); }
+    .skill-desc { font-size:0.72rem;color:var(--muted);line-height:1.6;margin-bottom:0.8rem; }
+    .skill-tags { display:flex;flex-wrap:wrap;gap:0.35rem; }
+    .tag { background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:0.62rem;padding:0.18rem 0.5rem;border-radius:2px;letter-spacing:0.04em; }
+
+    /* ── PROJECTS ─────────────────────────── */
+    #projects { padding:6rem 3rem;max-width:1200px;margin:0 auto; }
+    .projects-header { margin-bottom:2.5rem; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:6px;overflow:hidden;transition:all 0.3s;
+    }
+    .project-card:hover {
+      border-color:var(--green-mid);transform:translateY(-3px);
+      box-shadow:0 8px 32px rgba(0,255,136,0.07);
+    }
+    .project-header {
+      padding:1.4rem 1.4rem 0;
+      display:flex;justify-content:space-between;align-items:flex-start;
+    }
+    .project-badge { font-size:0.6rem;padding:0.2rem 0.6rem;border-radius:2px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600; }
+    .badge-green { background:var(--green-dim);color:var(--green);border:1px solid var(--green-mid); }
+    .badge-amber { background:rgba(255,165,0,0.12);color:var(--amber);border:1px solid rgba(255,165,0,0.35); }
+    .badge-blue { background:rgba(88,166,255,0.12);color:var(--blue);border:1px solid rgba(88,166,255,0.35); }
+
+    .project-body { padding:1rem 1.4rem 1.4rem; }
+    .project-title { font-family:var(--font-sans);font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:var(--text); }
+    .project-desc { font-size:0.76rem;color:var(--muted);line-height:1.75;margin-bottom:1rem; }
+    .project-stack { display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1rem; }
+    .project-links { display:flex;gap:1rem;padding-top:1rem;border-top:1px solid var(--border); }
+    .project-link {
+      font-size:0.68rem;color:var(--muted);text-decoration:none;
+      letter-spacing:0.05em;display:flex;align-items:center;gap:0.3rem;transition:color 0.2s;
+    }
+    .project-link:hover { color:var(--green); }
+
+    /* ── CERTIFICATIONS ───────────────────── */
+    #certifications { padding:6rem 3rem;max-width:1200px;margin:0 auto; }
+    .certs-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem; }
+    .cert-card {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:6px;padding:1.2rem 1.4rem;transition:all 0.3s;
+      display:flex;flex-direction:column;gap:0.5rem;
+    }
+    .cert-card:hover { border-color:var(--green-mid);transform:translateY(-2px); }
+    .cert-icon { font-size:1.4rem; }
+    .cert-name { font-family:var(--font-sans);font-weight:700;font-size:0.9rem;color:var(--text); }
+    .cert-issuer { font-size:0.7rem;color:var(--green); }
+    .cert-detail { font-size:0.68rem;color:var(--muted); }
+
+    /* ── CONTACT ──────────────────────────── */
+    #contact { padding:6rem 3rem;max-width:800px;margin:0 auto;text-align:center; }
+    .contact-box {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:8px;padding:3rem;margin-top:2rem;position:relative;overflow:hidden;
+    }
+    .contact-box::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--green),transparent);
+    }
+    .contact-desc { color:var(--muted);font-size:0.83rem;line-height:1.85;margin-bottom:2rem; }
+    .contact-links { display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap; }
+    .contact-link {
+      display:flex;align-items:center;gap:0.5rem;color:var(--muted);text-decoration:none;
+      font-size:0.78rem;padding:0.7rem 1.2rem;border:1px solid var(--border);
+      border-radius:4px;transition:all 0.2s;
+    }
+    .contact-link:hover { color:var(--green);border-color:var(--green-mid);background:var(--green-dim); }
+
+    footer {
+      border-top:1px solid var(--border);padding:1.8rem 3rem;
+      display:flex;justify-content:space-between;align-items:center;
+      color:var(--muted);font-size:0.68rem;position:relative;z-index:1;
+    }
+
+    .divider { max-width:1200px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent); }
+
+    .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease; }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+
+    /* hide lang-specific */
+    [data-en], [data-fr] { }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      #hero { padding: 7rem 1.2rem 3rem; }
+      #about, #experience, #skills, #projects, #certifications, #contact { padding: 4rem 1.2rem; }
+      .nav-center { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">khalil<span>.sec</span></div>
+  <ul class="nav-center">
+    <li><a href="#about"><span data-en>About</span><span data-fr style="display:none">À propos</span></a></li>
+    <li><a href="#experience"><span data-en>Experience</span><span data-fr style="display:none">Expérience</span></a></li>
+    <li><a href="#skills"><span data-en>Skills</span><span data-fr style="display:none">Compétences</span></a></li>
+    <li><a href="#projects"><span data-en>Projects</span><span data-fr style="display:none">Projets</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+    </div>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      <span data-en>open to opportunities</span>
+      <span data-fr style="display:none">disponible</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span>▶</span>
+      <span data-en>Infrastructure Engineer → Cybersecurity</span>
+      <span data-fr style="display:none">Ingénieur Infrastructure → Cybersécurité</span>
+    </div>
+    <h1 class="hero-name">
+      M. Khalil<br><span class="accent">Ghiati.</span>
+    </h1>
+    <p class="hero-title">
+      <span data-en>Infrastructure · Zero Trust · Security · DevOps</span>
+      <span data-fr style="display:none">Infrastructure · Zero Trust · Sécurité · DevOps</span>
+    </p>
+    <p class="hero-desc" data-en>
+      Engineering graduate specialised in network infrastructure and cybersecurity.
+      I build hardened systems, automate everything, and bridge DevOps with security principles —
+      from 5G telecom projects at Bouygues to Zero Trust labs on Kubernetes.
+    </p>
+    <p class="hero-desc" data-fr style="display:none">
+      Ingénieur diplômé spécialisé en infrastructure réseau et cybersécurité.
+      Je construis des systèmes durcis, automatise les déploiements et connecte
+      les pratiques DevOps aux principes de sécurité — des projets télécom 5G chez
+      Bouygues aux labs Zero Trust sur Kubernetes.
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">TOEIC 940/990</span>
+      <span class="hero-badge">TryHackMe SOC L1</span>
+      <span class="hero-badge">Azure AZ-900</span>
+      <span class="hero-badge">Root-Me 100+</span>
+      <span class="hero-badge">Lyon, France</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">
+        <span data-en>View Projects</span>
+        <span data-fr style="display:none">Voir les projets</span>
+      </a>
+      <a href="#" class="btn btn-outline" id="cv-download-btn" onclick="downloadCV(event)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-en>Download CV</span>
+        <span data-fr style="display:none">Télécharger CV</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="terminal-bar">
+      <div class="t-dot t-red"></div>
+      <div class="t-dot t-yellow"></div>
+      <div class="t-dot t-green-dot"></div>
+      <span class="terminal-title">zero-trust-k8s ~ kubectl</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">khalil@k8s:~$ </span><span class="t-cmd">kubectl get pods -n security</span></div>
+      <div class="t-success">NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS&nbsp;&nbsp;&nbsp;READY</div>
+      <div class="t-out">istio-pilot-7d9f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;&nbsp;1/1</div>
+      <div class="t-out">suricata-ids-8c2a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;&nbsp;1/1</div>
+      <div class="t-out">grafana-loki-b4f1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;&nbsp;1/1</div>
+      <div class="t-out">cert-manager-9e3d&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;&nbsp;1/1</div>
+      <div><span class="t-prompt">khalil@k8s:~$ </span><span class="t-cmd">terraform plan</span></div>
+      <div class="t-success">Plan: 12 to add, 0 to change, 0 to destroy.</div>
+      <div><span class="t-prompt">khalil@k8s:~$ </span><span class="t-cmd">trivy image scan --severity HIGH</span></div>
+      <div class="t-warn">Total: 0 (HIGH: 0, CRITICAL: 0)</div>
+      <div class="t-success">✔ All security checks passed</div>
+      <div><span class="t-prompt">khalil@k8s:~$ </span><span class="t-cursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">
+      <span data-en>About me</span>
+      <span data-fr style="display:none">À propos</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Building secure<br>systems <span style="color:var(--green)">from scratch.</span></span>
+      <span data-fr style="display:none">Construire des systèmes<br>sécurisés <span style="color:var(--green)">à la main.</span></span>
+    </h2>
+    <p class="about-text" data-en>
+      I'm a network and telecom engineer pivoting into cybersecurity — not by watching tutorials,
+      but by building real labs, breaking things, and documenting every lesson. I started renfermé
+      in my technical bubble, and I've grown into a team player who understands the full stack of
+      a project: the KPIs, the people, and the packets.
+    </p>
+    <p class="about-text" data-fr style="display:none">
+      Ingénieur réseau et télécom en transition vers la cybersécurité — pas en regardant des tutoriels,
+      mais en construisant de vrais labs, en cassant des choses, et en documentant chaque leçon.
+      J'ai commencé très technique et renfermé, et je suis devenu un joueur d'équipe qui comprend
+      le projet dans sa globalité : les KPIs, les personnes, et les paquets réseau.
+    </p>
+    <p class="about-text" data-en>
+      From leading 4 major telecom projects at Bouygues Telecom (300+ sites, 5G, ANSSI compliance)
+      to building a Zero Trust Kubernetes lab from scratch — my work always sits at the intersection
+      of infrastructure and security.
+    </p>
+    <p class="about-text" data-fr style="display:none">
+      De la gestion de 4 projets télécom majeurs chez Bouygues Telecom (300+ sites, 5G, conformité ANSSI)
+      à la construction d'un lab Zero Trust sur Kubernetes — mon travail se situe toujours à
+      l'intersection de l'infrastructure et de la sécurité.
+    </p>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="stat-num">3+</span>
+        <span class="stat-label" data-en>Years exp.</span>
+        <span class="stat-label" data-fr style="display:none">Ans d'exp.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">300+</span>
+        <span class="stat-label" data-en>Sites managed</span>
+        <span class="stat-label" data-fr style="display:none">Sites gérés</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1.2k+</span>
+        <span class="stat-label" data-en>Endpoints monitored</span>
+        <span class="stat-label" data-fr style="display:none">Terminaux supervisés</span>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" style="transition-delay:0.2s">
+    <div class="focus-card">
+      <div class="focus-label">// current focus</div>
+      <div class="focus-item"><span class="fi-green">▸</span> <span data-en>Zero Trust architecture & Kubernetes security</span><span data-fr style="display:none">Architecture Zero Trust & sécurité Kubernetes</span></div>
+      <div class="focus-item"><span class="fi-green">▸</span> <span data-en>Linux hardening (CIS benchmarks, ANSSI)</span><span data-fr style="display:none">Durcissement Linux (CIS benchmarks, ANSSI)</span></div>
+      <div class="focus-item"><span class="fi-green">▸</span> <span data-en>IDS/IPS with MITRE ATT&CK mapping</span><span data-fr style="display:none">IDS/IPS avec mapping MITRE ATT&CK</span></div>
+      <div class="focus-item"><span class="fi-green">▸</span> <span data-en>SIEM, Loki/Grafana, ELK Stack</span><span data-fr style="display:none">SIEM, Loki/Grafana, ELK Stack</span></div>
+      <div class="focus-item"><span class="fi-green">▸</span> <span data-en>CI/CD security (Trivy, OPA/Gatekeeper)</span><span data-fr style="display:none">Sécurité CI/CD (Trivy, OPA/Gatekeeper)</span></div>
+      <br>
+      <div class="focus-label">// next milestone</div>
+      <div class="focus-item"><span class="fi-amber">▸</span> <span data-en>Cilium open source contribution (eBPF networking)</span><span data-fr style="display:none">Contribution open source Cilium (réseau eBPF)</span></div>
+      <div class="focus-item"><span class="fi-amber">▸</span> <span data-en>Cloud security (AWS) & eJPT / OSCP path</span><span data-fr style="display:none">Sécurité Cloud (AWS) & parcours eJPT / OSCP</span></div>
+      <br>
+      <div class="focus-label">// interests</div>
+      <div class="focus-item"><span class="fi-blue">▸</span> <span data-en>Karate Black Belt (Shodan) · BJJ beginner</span><span data-fr style="display:none">Ceinture noire Karaté (Shodan) · BJJ débutant</span></div>
+      <div class="focus-item"><span class="fi-blue">▸</span> <span data-en>Hackathons — Lablab.ai (international teams)</span><span data-fr style="display:none">Hackathons — Lablab.ai (équipes internationales)</span></div>
+      <div class="focus-item"><span class="fi-blue">▸</span> <span data-en>CTF challenges — Root-Me, TryHackMe</span><span data-fr style="display:none">Challenges CTF — Root-Me, TryHackMe</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">
+      <span data-en>Experience</span>
+      <span data-fr style="display:none">Expérience</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Where I've <span style="color:var(--green)">shipped.</span></span>
+      <span data-fr style="display:none">Là où j'ai <span style="color:var(--green)">livré.</span></span>
+    </h2>
+  </div>
+
+  <div class="exp-timeline">
+
+    <!-- Bouygues -->
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <div>
+          <div class="exp-company">Bouygues Telecom</div>
+          <div class="exp-role">
+            <span data-en>Telecom Project Manager</span>
+            <span data-fr style="display:none">Chef de Projet Télécom</span>
+          </div>
+          <div class="exp-location">📍 Lyon, France</div>
+        </div>
+        <div class="exp-date">
+          <span data-en>Sept 2024 — Sept 2025</span>
+          <span data-fr style="display:none">Sept. 2024 — Sept. 2025</span>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li data-en>Automated data collection and qualification across <strong>300+ telecom sites</strong> via APIs — +90% operational efficiency gain</li>
+        <li data-fr style="display:none">Automatisation de la collecte et qualification des données sur <strong>300+ sites</strong> via APIs — gain d'efficacité opérationnelle <strong>+90%</strong></li>
+        <li data-en>Managed end-to-end delivery of <strong>4 major projects</strong> with full stakeholder reporting and milestone compliance</li>
+        <li data-fr style="display:none">Gestion bout en bout de <strong>4 projets majeurs</strong> avec respect des jalons et reporting stakeholders</li>
+        <li data-en>Conducted <strong>5G infrastructure security analysis</strong> aligned with ANSSI recommendations and compliance audits</li>
+        <li data-fr style="display:none">Analyse de sécurité des infrastructures <strong>5G</strong> selon recommandations <strong>ANSSI</strong> et contribution aux audits de conformité</li>
+        <li data-en>Coordinated cross-functional teams and explored AI-based solutions for operational optimisation</li>
+        <li data-fr style="display:none">Coordination de projets interservices avec exploration de solutions IA pour l'optimisation opérationnelle</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="etag">5G</span><span class="etag">LTE</span><span class="etag">FTTH</span>
+        <span class="etag">IMS</span><span class="etag">VoLTE</span><span class="etag">DWDM</span>
+        <span class="etag">ANSSI</span><span class="etag">Wi-Fi</span>
+      </div>
+    </div>
+
+    <!-- CogniScan -->
+    <div class="exp-card reveal" style="transition-delay:0.1s">
+      <div class="exp-top">
+        <div>
+          <div class="exp-company">CogniScan <span style="color:var(--muted);font-size:0.8rem;font-weight:400">(Start-up)</span></div>
+          <div class="exp-role">
+            <span data-en>ML Engineer & Project Manager</span>
+            <span data-fr style="display:none">ML Engineer & Chef de Projet</span>
+          </div>
+          <div class="exp-location">📍 Limoges, France</div>
+        </div>
+        <div class="exp-date">
+          <span data-en>Apr 2024 — Aug 2024</span>
+          <span data-fr style="display:none">Avr. 2024 — Août 2024</span>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li data-en>Designed interactive data analysis and visualisation tools (Python, Dash, Plotly)</li>
+        <li data-fr style="display:none">Conception d'outils d'analyse et visualisation interactive de données (Python, Dash, Plotly)</li>
+        <li data-en>Optimised <strong>CNN architectures</strong> for anomaly detection on medical imaging datasets</li>
+        <li data-fr style="display:none">Optimisation de réseaux neuronaux convolutifs (<strong>CNN</strong>) pour détection d'anomalies sur imagerie médicale</li>
+        <li data-en>Developed signal processing algorithms for biological signature extraction and noise reduction</li>
+        <li data-fr style="display:none">Développement d'algorithmes de traitement du signal pour extraction de signatures biologiques et réduction de bruit</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="etag">Python</span><span class="etag">PyTorch</span>
+        <span class="etag">TensorFlow</span><span class="etag">Matlab</span>
+        <span class="etag">REST API</span><span class="etag">Embedded</span>
+      </div>
+    </div>
+
+    <!-- ETEX -->
+    <div class="exp-card reveal" style="transition-delay:0.2s">
+      <div class="exp-top">
+        <div>
+          <div class="exp-company">ETEX Group</div>
+          <div class="exp-role">
+            <span data-en>Assistant Regional IT Infrastructure Manager</span>
+            <span data-fr style="display:none">Assistant Responsable Infrastructure IT Régional</span>
+          </div>
+          <div class="exp-location">📍 Avignon, France</div>
+        </div>
+        <div class="exp-date">
+          <span data-en>Jun 2023 — Aug 2023</span>
+          <span data-fr style="display:none">Juin 2023 — Août 2023</span>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li data-en>Deployed and administered <strong>Centreon</strong> monitoring covering <strong>1,200+ endpoints</strong> across Western Europe</li>
+        <li data-fr style="display:none">Déploiement et administration d'une solution <strong>Centreon</strong> pour un parc de <strong>1 200+ terminaux</strong> en Europe de l'Ouest</li>
+        <li data-en>Led successful server migration from <strong>VMware → Hyper-V</strong> with full monitoring integration</li>
+        <li data-fr style="display:none">Migration réussie d'un parc serveur de <strong>VMware vers Hyper-V</strong> avec intégration complète au monitoring</li>
+        <li data-en>Hardened Linux servers following <strong>CIS benchmarks</strong> and ANSSI recommendations (SSH, firewall, patching)</li>
+        <li data-fr style="display:none">Durcissement sécurité des serveurs Linux selon benchmarks <strong>CIS</strong> et recommandations <strong>ANSSI</strong> (SSH, firewall, patching)</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="etag">Linux</span><span class="etag">Docker</span>
+        <span class="etag">Centreon</span><span class="etag">Hyper-V</span>
+        <span class="etag">Bash</span><span class="etag">CIS</span><span class="etag">Firewall</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-header reveal">
+    <div class="section-label">
+      <span data-en>Skills</span>
+      <span data-fr style="display:none">Compétences</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>What I work with</span>
+      <span data-fr style="display:none">Mon arsenal technique</span>
+    </h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">
+        <span data-en>Security & Zero Trust</span>
+        <span data-fr style="display:none">Sécurité & Zero Trust</span>
+      </div>
+      <div class="skill-desc" data-en>Network segmentation, mTLS, IDS/IPS, threat detection</div>
+      <div class="skill-desc" data-fr style="display:none">Segmentation réseau, mTLS, IDS/IPS, détection de menaces</div>
+      <div class="skill-tags">
+        <span class="tag">Suricata</span><span class="tag">Fail2ban</span>
+        <span class="tag">MITRE ATT&CK</span><span class="tag">OPA/Gatekeeper</span>
+        <span class="tag">Istio mTLS</span><span class="tag">WireGuard</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.05s">
+      <div class="skill-icon">☸️</div>
+      <div class="skill-name">
+        <span data-en>Kubernetes & IaC</span>
+        <span data-fr style="display:none">Kubernetes & IaC</span>
+      </div>
+      <div class="skill-desc" data-en>Container orchestration, infrastructure as code, policy enforcement</div>
+      <div class="skill-desc" data-fr style="display:none">Orchestration de conteneurs, infrastructure as code, policy enforcement</div>
+      <div class="skill-tags">
+        <span class="tag">Kubernetes</span><span class="tag">Terraform</span>
+        <span class="tag">Docker</span><span class="tag">Helm</span>
+        <span class="tag">cert-manager</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.1s">
+      <div class="skill-icon">🐧</div>
+      <div class="skill-name">
+        <span data-en>Linux & Infrastructure</span>
+        <span data-fr style="display:none">Linux & Infrastructure</span>
+      </div>
+      <div class="skill-desc" data-en>Server hardening, process management, CIS & ANSSI compliance</div>
+      <div class="skill-desc" data-fr style="display:none">Durcissement serveur, gestion des processus, conformité CIS & ANSSI</div>
+      <div class="skill-tags">
+        <span class="tag">Ubuntu</span><span class="tag">Bash</span>
+        <span class="tag">SSH Hardening</span><span class="tag">UFW</span>
+        <span class="tag">Centreon</span><span class="tag">Hyper-V</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.15s">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">SIEM & Monitoring</div>
+      <div class="skill-desc" data-en>Centralised logging, real-time alerting, threat correlation</div>
+      <div class="skill-desc" data-fr style="display:none">Logs centralisés, alertes temps réel, corrélation de menaces</div>
+      <div class="skill-tags">
+        <span class="tag">ELK Stack</span><span class="tag">Loki</span>
+        <span class="tag">Grafana</span><span class="tag">Netdata</span>
+        <span class="tag">inotifywait</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.2s">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-name">
+        <span data-en>DevSecOps & CI/CD</span>
+        <span data-fr style="display:none">DevSecOps & CI/CD</span>
+      </div>
+      <div class="skill-desc" data-en>Secure pipelines, image scanning, automated compliance</div>
+      <div class="skill-desc" data-fr style="display:none">Pipelines sécurisés, scan d'images, conformité automatisée</div>
+      <div class="skill-tags">
+        <span class="tag">GitHub Actions</span><span class="tag">Trivy</span>
+        <span class="tag">Git</span><span class="tag">Python</span>
+        <span class="tag">Go</span><span class="tag">Rust</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.25s">
+      <div class="skill-icon">📡</div>
+      <div class="skill-name">
+        <span data-en>Telecom & Networking</span>
+        <span data-fr style="display:none">Télécom & Réseau</span>
+      </div>
+      <div class="skill-desc" data-en>5G/LTE/FTTH, VoIP, MPLS, firewall, network architecture</div>
+      <div class="skill-desc" data-fr style="display:none">5G/LTE/FTTH, VoIP, MPLS, firewall, architecture réseau</div>
+      <div class="skill-tags">
+        <span class="tag">5G</span><span class="tag">FTTH</span>
+        <span class="tag">VoLTE</span><span class="tag">MPLS</span>
+        <span class="tag">Firewall</span><span class="tag">DWDM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header reveal">
+    <div class="section-label">
+      <span data-en>Projects</span>
+      <span data-fr style="display:none">Projets</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Built, broken,<br>and <span style="color:var(--green)">documented.</span></span>
+      <span data-fr style="display:none">Construit, cassé,<br>et <span style="color:var(--green)">documenté.</span></span>
+    </h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <span style="font-size:1.4rem">☸️</span>
+        <span class="project-badge badge-amber">
+          <span data-en>In Progress</span>
+          <span data-fr style="display:none">En cours</span>
+        </span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <span data-en>Zero Trust Network Lab</span>
+          <span data-fr style="display:none">Lab Zero Trust Kubernetes</span>
+        </div>
+        <div class="project-desc" data-en>
+          End-to-end Zero Trust architecture on k3s Kubernetes. Namespace micro-segmentation, mTLS via Istio, WireGuard VPN, WAF, Terraform IaC, and MITRE ATT&CK attack simulations. Deployable in &lt;5min.
+        </div>
+        <div class="project-desc" data-fr style="display:none">
+          Architecture Zero Trust complète sur Kubernetes k3s. Segmentation par namespace, mTLS via Istio, VPN WireGuard, WAF, Terraform IaC, et simulations d'attaques MITRE ATT&CK. Déployable en &lt;5min.
+        </div>
+        <div class="project-stack">
+          <span class="tag">Kubernetes</span><span class="tag">Terraform</span>
+          <span class="tag">Istio</span><span class="tag">WireGuard</span>
+          <span class="tag">OPA</span><span class="tag">Trivy</span>
+          <span class="tag">Loki/Grafana</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Khalil-secure/zero-trust-k8s-lab" class="project-link" target="_blank">↗ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.1s">
+      <div class="project-header">
+        <span style="font-size:1.4rem">🛡️</span>
+        <span class="project-badge badge-green">
+          <span data-en>Live</span>
+          <span data-fr style="display:none">Actif</span>
+        </span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <span data-en>Homelab SOC</span>
+          <span data-fr style="display:none">Homelab SOC</span>
+        </div>
+        <div class="project-desc" data-en>
+          Full SOC lab on isolated Docker infrastructure. Hardened SSH, Fail2ban, Suricata IDS/IPS mapped to MITRE ATT&CK, ELK Stack alert correlation, Netdata monitoring, and automated CI/CD security validation.
+        </div>
+        <div class="project-desc" data-fr style="display:none">
+          Lab SOC complet sur Docker isolé. SSH durci, Fail2ban, IDS/IPS Suricata mappé MITRE ATT&CK, corrélation d'alertes ELK Stack, monitoring Netdata, et validation sécurité CI/CD automatisée.
+        </div>
+        <div class="project-stack">
+          <span class="tag">Suricata</span><span class="tag">ELK Stack</span>
+          <span class="tag">Docker</span><span class="tag">Fail2ban</span>
+          <span class="tag">Netdata</span><span class="tag">GitHub Actions</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Khalil-secure/hardened-infra" class="project-link" target="_blank">↗ GitHub</a>
+          <a href="https://github.com/Khalil-secure/ids-ips-project" class="project-link" target="_blank">↗ IDS/IPS</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.2s">
+      <div class="project-header">
+        <span style="font-size:1.4rem">🌐</span>
+        <span class="project-badge badge-blue">
+          <span data-en>Open Source</span>
+          <span data-fr style="display:none">Open Source</span>
+        </span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <span data-en>Cilium Contribution</span>
+          <span data-fr style="display:none">Contribution Cilium</span>
+        </div>
+        <div class="project-desc" data-en>
+          Contributing to Cilium — CNCF graduated eBPF-based Kubernetes networking and security project used at Meta, Google, and 700+ organisations worldwide. Focus: NetworkPolicy and Zero Trust use cases.
+        </div>
+        <div class="project-desc" data-fr style="display:none">
+          Contribution à Cilium — projet CNCF de réseau et sécurité Kubernetes basé sur eBPF, utilisé chez Meta, Google et 700+ organisations. Focus : NetworkPolicy et cas d'usage Zero Trust.
+        </div>
+        <div class="project-stack">
+          <span class="tag">Go</span><span class="tag">eBPF</span>
+          <span class="tag">Kubernetes</span><span class="tag">CNCF</span>
+          <span class="tag">NetworkPolicy</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/cilium/cilium" class="project-link" target="_blank">↗ cilium/cilium</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <div class="section-label">
+      <span data-en>Certifications</span>
+      <span data-fr style="display:none">Certifications</span>
+    </div>
+    <h2 class="section-title">
+      <span data-en>Credentials & <span style="color:var(--green)">Training.</span></span>
+      <span data-fr style="display:none">Certifications & <span style="color:var(--green)">Formation.</span></span>
+    </h2>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🎯</div>
+      <div class="cert-name">SOC Level 1</div>
+      <div class="cert-issuer">TryHackMe</div>
+      <div class="cert-detail" data-en>Certified — Blue team operations</div>
+      <div class="cert-detail" data-fr style="display:none">Certifié — Opérations Blue Team</div>
+    </div>
+    <div class="cert-card reveal" style="transition-delay:0.05s">
+      <div class="cert-icon">🔓</div>
+      <div class="cert-name">Jr Penetration Tester</div>
+      <div class="cert-issuer">TryHackMe</div>
+      <div class="cert-detail" data-en>Learning path completed</div>
+      <div class="cert-detail" data-fr style="display:none">Parcours complété</div>
+    </div>
+    <div class="cert-card reveal" style="transition-delay:0.1s">
+      <div class="cert-icon">☁️</div>
+      <div class="cert-name">Azure Fundamentals</div>
+      <div class="cert-issuer">Microsoft — AZ-900</div>
+      <div class="cert-detail" data-en>Cloud foundations</div>
+      <div class="cert-detail" data-fr style="display:none">Fondamentaux Cloud</div>
+    </div>
+    <div class="cert-card reveal" style="transition-delay:0.2s">
+      <div class="cert-icon">⚔️</div>
+      <div class="cert-name">Root-Me 100+</div>
+      <div class="cert-issuer">Root-Me.org</div>
+      <div class="cert-detail" data-en>100+ challenges solved</div>
+      <div class="cert-detail" data-fr style="display:none">100+ challenges résolus</div>
+    </div>
+    <div class="cert-card reveal" style="transition-delay:0.25s">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">
+        <span data-en>Engineering Degree</span>
+        <span data-fr style="display:none">Diplôme d'Ingénieur</span>
+      </div>
+      <div class="cert-issuer">ENSIL-ENSCI — Limoges</div>
+      <div class="cert-detail" data-en>Electronics & Telecom · 2022–2025</div>
+      <div class="cert-detail" data-fr style="display:none">Électronique & Télécom · 2022–2025</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center">Contact</div>
+    <h2 class="section-title">
+      <span data-en>Let's build something <span style="color:var(--green)">secure.</span></span>
+      <span data-fr style="display:none">Construisons quelque chose <span style="color:var(--green)">de sécurisé.</span></span>
+    </h2>
+  </div>
+  <div class="contact-box reveal">
+    <p class="contact-desc" data-en>
+      I'm actively looking for opportunities in infrastructure engineering and cybersecurity.
+      If you're building hardened systems, need a SOC engineer, or want someone who learns
+      by doing — let's talk.
+    </p>
+    <p class="contact-desc" data-fr style="display:none">
+      Je suis activement à la recherche d'opportunités en ingénierie infrastructure et cybersécurité.
+      Si vous construisez des systèmes sécurisés, cherchez un ingénieur SOC, ou voulez quelqu'un
+      qui apprend en faisant — parlons-en.
+    </p>
+    <div class="contact-links">
+      <a href="https://github.com/Khalil-secure" class="contact-link" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:medkhalilghiati@gmail.com" class="contact-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/mohamed-ghiati-khalil/" class="contact-link" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>khalil.sec — <span data-en>built with terminal energy</span><span data-fr style="display:none">construit avec de l'énergie terminal</span></span>
+  <span style="color:var(--green)">// <span data-en>always learning</span><span data-fr style="display:none">toujours en apprentissage</span></span>
+</footer>
+
+<script>
+  // ── Cursor ────────────────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 5 + 'px';
+    cursor.style.top = my - 5 + 'px';
+  });
+
+  (function animateRing() {
+    rx += (mx - rx - 16) * 0.12;
+    ry += (my - ry - 16) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+    });
+  });
+
+  // ── CV Download (language-aware) ─────────────────────────────
+  // Place both PDF files next to this HTML file on your server:
+  //   khalil-ghiati-cv-en.pdf
+  //   khalil-ghiati-cv-fr.pdf
+  function downloadCV(e) {
+    e.preventDefault();
+    const file = currentLang === 'fr'
+      ? 'khalil-ghiati-cv-fr.pdf'
+      : 'khalil-ghiati-cv-en.pdf';
+    const a = document.createElement('a');
+    a.href = file;
+    a.download = file;
+    a.click();
+  }
+
+  // ── Language toggle ───────────────────────────────────────────
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Toggle button styles
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+
+    // Show/hide elements
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.style.display = lang === 'en' ? '' : 'none';
+    });
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      el.style.display = lang === 'fr' ? '' : 'none';
+    });
+
+    // Fix inline-flex elements that need display:inline-flex not ''
+    // nav links, section-label use default block/inline — just let them restore
+
+    document.documentElement.lang = lang;
+  }
+
+  // ── Scroll reveal ─────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
