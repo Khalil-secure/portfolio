@@ -81,36 +81,48 @@ body::before {
 
 nav {
   display: flex;
-  background: rgba(12,17,24,0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(10,14,22,0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.09);
   border-radius: 100px;
-  padding: 4px;
-  gap: 2px;
+  padding: 5px;
+  gap: 3px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,116,0.08);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,212,116,0.1);
 }
 
 .nav-btn {
   font-family: var(--mono);
-  font-size: 0.67rem;
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 7px 20px;
+  padding: 8px 18px;
   border: none;
   background: transparent;
-  color: var(--text2);
+  color: var(--text3);
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
-.nav-btn:hover { color: var(--text); }
-.nav-btn.active { background: var(--accent); color: #000; font-weight: 700; }
+.nav-btn svg { opacity: 0.5; transition: opacity 0.2s; flex-shrink: 0; }
+.nav-btn:hover { color: var(--text2); background: rgba(255,255,255,0.05); }
+.nav-btn:hover svg { opacity: 0.8; }
+.nav-btn.active {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  box-shadow: 0 2px 12px rgba(0,212,116,0.35);
+}
+.nav-btn.active svg { opacity: 1; }
 
 .avail {
   display: flex; align-items: center; gap: 7px;
@@ -372,6 +384,8 @@ nav {
 @media (max-width: 860px) {
   .top-bar { padding: 16px 20px; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
   nav { position: static; transform: none; order: 3; width: 100%; justify-content: center; }
+  .nav-btn { padding: 7px 13px; font-size: 0.6rem; gap: 5px; }
+  .nav-btn svg { width: 11px; height: 11px; }
   .content-wrap { padding: 0 12px 24px; }
   .page-box { border-radius: 12px; }
   #home { grid-template-columns: 1fr; }
@@ -387,10 +401,22 @@ nav {
 <div class="top-bar">
   <div class="logo">khalil<em>.sec</em></div>
   <nav>
-    <button class="nav-btn active" onclick="show('home',this)">Home</button>
-    <button class="nav-btn" onclick="show('experience',this)">Experience</button>
-    <button class="nav-btn" onclick="show('projects',this)">Projects</button>
-    <button class="nav-btn" onclick="show('certifications',this)">Certs</button>
+    <button class="nav-btn active" onclick="show('home',this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </button>
+    <button class="nav-btn" onclick="show('experience',this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      Experience
+    </button>
+    <button class="nav-btn" onclick="show('projects',this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Projects
+    </button>
+    <button class="nav-btn" onclick="show('certifications',this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      Certs
+    </button>
   </nav>
   <div class="avail"><span class="avail-dot"></span>open to work</div>
 </div>
@@ -427,7 +453,7 @@ nav {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         Email
       </a>
-      <a href="khalil-ghiati-cv-fr.pdf" class="soc">
+      <a href="#" class="soc">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Resume
       </a>
@@ -578,11 +604,11 @@ nav {
     <h2 class="sec-title">Credentials & <span class="acc">Training.</span></h2>
     <p class="sec-sub">// Certifications & formation</p>
     <div class="certs-grid">
-      <div class="cert-card"><span class="cert-ico">🎓</span><div class="cert-name">Engineering Degree</div><div class="cert-iss">ENSIL-ENSCI — Limoges</div><div class="cert-desc">Electronics & Telecommunications · 2022–2026. Infrastructure & Network.</div><span class="badge bg">Obtained</span></div>
       <div class="cert-card"><span class="cert-ico">🎯</span><div class="cert-name">SOC Level 1</div><div class="cert-iss">TryHackMe</div><div class="cert-desc">Blue team operations, threat detection and incident response.</div><span class="badge bg">Certified</span></div>
       <div class="cert-card"><span class="cert-ico">🔓</span><div class="cert-name">Jr Penetration Tester</div><div class="cert-iss">TryHackMe</div><div class="cert-desc">Web exploitation, network pentesting, privilege escalation.</div><span class="badge bb">Completed</span></div>
       <div class="cert-card"><span class="cert-ico">☁️</span><div class="cert-name">Azure Fundamentals</div><div class="cert-iss">Microsoft — AZ-900</div><div class="cert-desc">Cloud foundations — Azure services, security, compliance.</div><span class="badge bb">Certified</span></div>
       <div class="cert-card"><span class="cert-ico">⚔️</span><div class="cert-name">Root-Me 100+</div><div class="cert-iss">Root-Me.org</div><div class="cert-desc">100+ CTF challenges — web, crypto, network, system exploitation.</div><span class="badge bo">Active</span></div>
+      <div class="cert-card"><span class="cert-ico">🎓</span><div class="cert-name">Engineering Degree</div><div class="cert-iss">ENSIL-ENSCI — Limoges</div><div class="cert-desc">Electronics & Telecommunications · 2022–2026. Infrastructure & Security.</div><span class="badge bg">Obtained</span></div>
     </div>
   </div>
 </section>
