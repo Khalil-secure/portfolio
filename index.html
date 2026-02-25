@@ -334,7 +334,7 @@ nav {
 .proj-card {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: 10px; padding: 22px;
-  text-decoration: none; color: inherit; display: block;
+  color: inherit; display: block;
   transition: all .2s; position: relative; overflow: hidden;
 }
 .proj-card::before {
@@ -342,8 +342,17 @@ nav {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   opacity: 0; transition: opacity .2s;
 }
-.proj-card:hover { border-color: rgba(0,212,116,.25); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.4); }
+.proj-card:hover { border-color: rgba(0,212,116,.25); box-shadow: 0 8px 28px rgba(0,0,0,.4); }
 .proj-card:hover::before { opacity: 1; }
+
+.proj-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.proj-link:hover .proj-arr { color: var(--accent); }
+.proj-link:hover .proj-name { color: var(--accent); }
 .proj-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
 .proj-name { font-family: var(--display); font-size: 0.95rem; font-weight: 700; flex: 1; margin-right: 8px; color: var(--text); }
 .proj-arr { color: var(--text3); font-size: 0.82rem; transition: color .2s; }
@@ -354,6 +363,31 @@ nav {
 .ldot { width: 8px; height: 8px; border-radius: 50%; }
 .proj-stars { font-size: 0.7rem; color: var(--text2); }
 .proj-upd { font-size: 0.65rem; color: var(--text3); margin-left: auto; }
+
+.deploy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid rgba(0,212,116,.3);
+  border-radius: 4px;
+  background: rgba(0,212,116,.07);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all .18s;
+  flex-shrink: 0;
+}
+.deploy-btn:hover {
+  background: rgba(0,212,116,.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0,212,116,.2);
+  transform: translateY(-1px);
+}
 
 .load-more {
   display: block; margin: 24px auto 0; padding: 10px 32px;
@@ -481,7 +515,7 @@ nav {
         <div class="icons-row">
           <div class="tech-icon"><img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/istio/icon/color/istio-icon-color.svg" alt="Istio"><span>Istio</span></div>
           <div class="tech-icon"><img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/cilium/icon/color/cilium_icon-color.svg" alt="Cilium"><span>Cilium</span></div>
-          
+          <div class="tech-icon"><img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/opa/icon/color/opa-icon-color.svg" alt="OPA"><span>OPA</span></div>
           <!-- Suricata text badge fallback -->
           <div class="tech-icon" style="border-color:rgba(0,232,122,.2)">
             <span style="font-size:0.9rem;color:var(--accent);font-weight:700;font-family:var(--display)">IDS</span>
@@ -510,20 +544,19 @@ nav {
       <div class="stack-group">
         <div class="group-title">DevOps & Cloud</div>
         <div class="icons-row">
-          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg" alt="GitHub Actions"><span>Github Actions</span></div>
+          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg" alt="GitHub Actions"><span>GH Actions</span></div>
           <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"><span>Azure</span></div>
+          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS"><span>AWS</span></div>
           <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
-
         </div>
       </div>
       <div class="stack-group">
-        <div class="group-title">Automatisation</div>
-        <div class="icons-row">
+      <div class="group-title">Automatisation</div>
+      <div class="icons-row">
 
-          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
-          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" alt="Go"><span>Go</span></div>
-          <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" alt="Ansible"><span>Ansible</span></div>
-        </div>
+        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
+        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" alt="Go"><span>Go</span></div>
+        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" alt="Ansible"><span>Ansible</span></div>
       </div>
     </div>
   </div>
@@ -611,11 +644,11 @@ nav {
     <h2 class="sec-title">Credentials & <span class="acc">Training.</span></h2>
     <p class="sec-sub">// Certifications & formation</p>
     <div class="certs-grid">
-      <div class="cert-card"><span class="cert-ico">🎓</span><div class="cert-name">Engineering Degree</div><div class="cert-iss">ENSIL-ENSCI — Limoges</div><div class="cert-desc">Electronics & Telecommunications · 2022–2026. Infrastructure & Security.</div><span class="badge bg">Obtained</span></div>
       <div class="cert-card"><span class="cert-ico">🎯</span><div class="cert-name">SOC Level 1</div><div class="cert-iss">TryHackMe</div><div class="cert-desc">Blue team operations, threat detection and incident response.</div><span class="badge bg">Certified</span></div>
       <div class="cert-card"><span class="cert-ico">🔓</span><div class="cert-name">Jr Penetration Tester</div><div class="cert-iss">TryHackMe</div><div class="cert-desc">Web exploitation, network pentesting, privilege escalation.</div><span class="badge bb">Completed</span></div>
       <div class="cert-card"><span class="cert-ico">☁️</span><div class="cert-name">Azure Fundamentals</div><div class="cert-iss">Microsoft — AZ-900</div><div class="cert-desc">Cloud foundations — Azure services, security, compliance.</div><span class="badge bb">Certified</span></div>
       <div class="cert-card"><span class="cert-ico">⚔️</span><div class="cert-name">Root-Me 100+</div><div class="cert-iss">Root-Me.org</div><div class="cert-desc">100+ CTF challenges — web, crypto, network, system exploitation.</div><span class="badge bo">Active</span></div>
+      <div class="cert-card"><span class="cert-ico">🎓</span><div class="cert-name">Engineering Degree</div><div class="cert-iss">ENSIL-ENSCI — Limoges</div><div class="cert-desc">Electronics & Telecommunications · 2022–2026. Infrastructure & Security.</div><span class="badge bg">Obtained</span></div>
     </div>
   </div>
 </section>
@@ -660,15 +693,24 @@ async function fetchRepos() {
 function renderRepos() {
   const grid = document.getElementById('proj-grid')
   allRepos.slice(shown, shown+PER).forEach(repo => {
-    const card = document.createElement('a')
-    card.href = repo.html_url; card.target = '_blank'; card.className = 'proj-card'
+    const card = document.createElement('div')
+    card.className = 'proj-card'
+    const deployBtn = repo.homepage && repo.homepage.startsWith('http')
+      ? `<a href="${repo.homepage}" target="_blank" rel="noreferrer" class="deploy-btn" onclick="event.stopPropagation()">
+           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+           Deploy
+         </a>`
+      : ''
     card.innerHTML = `
-      <div class="proj-head"><div class="proj-name">${repo.name}</div><div class="proj-arr">↗</div></div>
-      <div class="proj-desc">${repo.description||'No description provided.'}</div>
+      <a href="${repo.html_url}" target="_blank" rel="noreferrer" class="proj-link">
+        <div class="proj-head"><div class="proj-name">${repo.name}</div><div class="proj-arr">↗</div></div>
+        <div class="proj-desc">${repo.description||'No description provided.'}</div>
+      </a>
       <div class="proj-meta">
         ${repo.language?`<div class="proj-lang"><span class="ldot" style="background:${LANG_COLORS[repo.language]||'#7d8fa3'}"></span>${repo.language}</div>`:''}
         ${repo.stargazers_count>0?`<div class="proj-stars">★ ${repo.stargazers_count}</div>`:''}
         <div class="proj-upd">Updated ${ago(repo.updated_at)}</div>
+        ${deployBtn}
       </div>`
     grid.appendChild(card)
   })
