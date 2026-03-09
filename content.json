@@ -1,0 +1,285 @@
+{
+  "personal": {
+    "logo_text": "khalil",
+    "logo_suffix": ".sec"
+  },
+  "availability": {
+    "en": "open to work",
+    "fr": "disponible"
+  },
+  "home": {
+    "eyebrow": {
+      "en": "AI Infrastructure Engineer",
+      "fr": "Ingénieur Infrastructure & IA"
+    },
+    "tagline": {
+      "en": "DevSecOps · AI Agents · Cloud Security",
+      "fr": "DevSecOps · Agents IA · Sécurité Cloud"
+    },
+    "name": "Khalil",
+    "name_accent": "Ghiati.",
+    "description": {
+      "en": "Engineering graduate specialised in <strong>AI-driven infrastructure</strong> and <strong>cybersecurity</strong>. I build systems where <strong>AI is a first-class infrastructure component</strong> — not a plugin. From <strong>5G telecom at Bouygues</strong> to <strong>LLM agents monitoring production Docker environments</strong>.",
+      "fr": "Ingénieur spécialisé en <strong>infrastructure pilotée par IA</strong> et <strong>cybersécurité</strong>. Je construis des systèmes où <strong>l'IA est un composant d'infrastructure de premier plan</strong> — pas un plugin. Du <strong>5G chez Bouygues Telecom</strong> aux <strong>agents LLM qui supervisent des environnements Docker en production</strong>."
+    },
+    "socials": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Khalil-secure",
+        "icon": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mohamed-ghiati-khalil/",
+        "icon": "linkedin"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:medkhalilghiati@gmail.com",
+        "icon": "email"
+      },
+      {
+        "label": "Resume",
+        "url": "khalil-ghiati-cv-fr.pdf",
+        "icon": "resume"
+      }
+    ],
+    "stack_label": {
+      "en": "Tool stack",
+      "fr": "Stack technique"
+    }
+  },
+  "experience": {
+    "title": {
+      "en": "Where I've <span class=\"acc\">shipped.</span>",
+      "fr": "Où j'ai <span class=\"acc\">livré.</span>"
+    },
+    "subtitle": {
+      "en": "// real work · real impact · production systems",
+      "fr": "// vrai travail · vrai impact · systèmes en production"
+    },
+    "jobs": [
+      {
+        "company": "Bouygues Telecom",
+        "period": "Sept 2024 — Sept 2025",
+        "role": {
+          "en": "Telecom Project Manager",
+          "fr": "Chef de Projet Télécom"
+        },
+        "location": "Lyon, France",
+        "tags": ["5G", "LTE", "FTTH", "ANSSI", "Python", "REST API"],
+        "bullets": {
+          "en": [
+            "Automated data collection across <strong>300+ telecom sites</strong> via APIs — <strong>+90% efficiency gain</strong>",
+            "Managed <strong>4 major projects</strong> end-to-end with full stakeholder reporting",
+            "<strong>5G infrastructure security analysis</strong> aligned with ANSSI recommendations",
+            "Cross-functional coordination with AI-based operational optimisation"
+          ],
+          "fr": [
+            "Automatisation de la collecte de données sur <strong>300+ sites télécom</strong> via APIs — <strong>+90% de gain d'efficacité</strong>",
+            "Gestion de <strong>4 projets majeurs</strong> de bout en bout avec reporting complet",
+            "<strong>Analyse sécurité infrastructure 5G</strong> alignée sur les recommandations ANSSI",
+            "Coordination transverse avec optimisation opérationnelle basée sur l'IA"
+          ]
+        }
+      },
+      {
+        "company": "CogniScan (Start-up)",
+        "period": "Apr 2024 — Aug 2024",
+        "role": {
+          "en": "ML Engineer & Project Manager",
+          "fr": "Ingénieur ML & Chef de Projet"
+        },
+        "location": "Limoges, France",
+        "tags": ["Python", "PyTorch", "TensorFlow", "Matlab"],
+        "bullets": {
+          "en": [
+            "Interactive data visualisation tools (Python, Dash, Plotly)",
+            "Optimised <strong>CNN architectures</strong> for anomaly detection on medical imaging",
+            "Signal processing algorithms for biological signature extraction"
+          ],
+          "fr": [
+            "Outils de visualisation de données interactifs (Python, Dash, Plotly)",
+            "Optimisation d'<strong>architectures CNN</strong> pour la détection d'anomalies sur imagerie médicale",
+            "Algorithmes de traitement du signal pour l'extraction de signatures biologiques"
+          ]
+        }
+      },
+      {
+        "company": "ETEX Group",
+        "period": "Jun 2023 — Aug 2023",
+        "role": {
+          "en": "Assistant Regional IT Infrastructure Manager",
+          "fr": "Assistant Responsable Infrastructure IT Régional"
+        },
+        "location": "Avignon, France",
+        "tags": ["Linux", "Docker", "Centreon", "Hyper-V", "Bash", "CIS"],
+        "bullets": {
+          "en": [
+            "Deployed <strong>Centreon</strong> monitoring across <strong>1 200+ endpoints</strong> in Western Europe",
+            "<strong>VMware to Hyper-V</strong> server migration with full monitoring integration",
+            "Linux hardening per <strong>CIS benchmarks</strong> and ANSSI (SSH, firewall, patching)"
+          ],
+          "fr": [
+            "Déploiement de la supervision <strong>Centreon</strong> sur <strong>1 200+ endpoints</strong> en Europe de l'Ouest",
+            "Migration serveurs <strong>VMware vers Hyper-V</strong> avec intégration complète du monitoring",
+            "Durcissement Linux selon <strong>référentiels CIS</strong> et ANSSI (SSH, pare-feu, correctifs)"
+          ]
+        }
+      }
+    ]
+  },
+  "projects": {
+    "title": {
+      "en": "Built, broken, <span class=\"acc\">documented.</span>",
+      "fr": "Construit, cassé, <span class=\"acc\">documenté.</span>"
+    },
+    "toggles": {
+      "code": {
+        "en": "Coding Projects",
+        "fr": "Projets Code"
+      },
+      "demo": {
+        "en": "Live Demos",
+        "fr": "Démos Live"
+      }
+    },
+    "subtitles": {
+      "code": {
+        "en": "Public repos · fetched live from GitHub · click to open",
+        "fr": "Repos publics · récupérés en direct depuis GitHub · cliquer pour ouvrir"
+      },
+      "demo": {
+        "en": "Live demos · GIF walkthroughs · click to view on GitHub",
+        "fr": "Démos live · walkthroughs GIF · cliquer pour voir sur GitHub"
+      }
+    },
+    "load_more": {
+      "en": "load more",
+      "fr": "voir plus"
+    },
+    "demos": [
+      {
+        "title": "AII — AI as Infrastructure",
+        "badge": "badge-ai",
+        "badge_label": "AI · DevSecOps",
+        "stack": ["Python", "LangGraph", "Claude API", "ChromaDB", "Docker"],
+        "repo": "https://github.com/Khalil-secure/AI_as_infrastructure",
+        "gif": "https://raw.githubusercontent.com/Khalil-secure/AI_as_infrastructure/main/AI_as_infrastructure_demo.gif",
+        "description": {
+          "en": "A LangGraph agent monitors Docker in real time, detects incidents, diagnoses root causes via Claude, and proposes corrective actions through a human trust layer. Zero tokens spent when everything is nominal.",
+          "fr": "Un agent LangGraph supervise Docker en temps réel, détecte les incidents, diagnostique les causes via Claude et propose des actions correctives via une couche de confiance humaine. Zéro token dépensé quand tout est nominal."
+        }
+      },
+      {
+        "title": "MailGuard — Gmail & Outlook",
+        "badge": "badge-sec",
+        "badge_label": "Security · Browser",
+        "stack": ["JavaScript", "Chrome API", "NLP", "Phishing Detection"],
+        "repo": "https://github.com/Khalil-secure/Mailguard_extension_preview",
+        "gif": "https://raw.githubusercontent.com/Khalil-secure/Mailguard_extension_preview/main/screenshots/Mailguard_alt_preview.gif",
+        "description": {
+          "en": "Browser extension that scans incoming emails in real time, detects phishing attempts, suspicious links, and social engineering patterns before you click anything.",
+          "fr": "Extension navigateur qui analyse les emails entrants en temps réel, détecte les tentatives de phishing, liens suspects et patterns d'ingénierie sociale avant tout clic."
+        }
+      },
+      {
+        "title": "MailGuard Alternative",
+        "badge": "badge-sec",
+        "badge_label": "Security · Email",
+        "stack": ["JavaScript", "Chrome API", "Pattern Matching", "Security"],
+        "repo": "https://github.com/Khalil-secure/MailGuard_alternative",
+        "gif": "https://raw.githubusercontent.com/Khalil-secure/MailGuard_alternative/main/screenvideo/Mailguard_alt_preview.gif",
+        "description": {
+          "en": "Lightweight alternative version of MailGuard with a different UI approach and extended detection rules for business email compromise and spoofed sender addresses.",
+          "fr": "Version alternative allégée de MailGuard avec une approche UI différente et des règles de détection étendues pour la compromission d'emails professionnels et les expéditeurs usurpés."
+        }
+      }
+    ]
+  },
+  "certifications": {
+    "title": {
+      "en": "Credentials & <span class=\"acc\">Training.</span>",
+      "fr": "Diplômes & <span class=\"acc\">Formation.</span>"
+    },
+    "subtitle": {
+      "en": "// certifications · formation · active learning",
+      "fr": "// certifications · formation · apprentissage actif"
+    },
+    "certs": [
+      {
+        "icon": "🎓",
+        "name": "Engineering Degree",
+        "issuer": "ENSIL-ENSCI — Limoges",
+        "badge_class": "cbg",
+        "badge_text": "Obtained",
+        "description": {
+          "en": "Electronics & Telecommunications · 2022-2026. Infrastructure & Security.",
+          "fr": "Electronique & Télécommunications · 2022-2026. Infrastructure & Sécurité."
+        }
+      },
+      {
+        "icon": "🎯",
+        "name": "SOC Level 1",
+        "issuer": "TryHackMe",
+        "badge_class": "cbg",
+        "badge_text": "Certified",
+        "description": {
+          "en": "Blue team operations, threat detection and incident response.",
+          "fr": "Opérations Blue Team, détection de menaces et réponse aux incidents."
+        }
+      },
+      {
+        "icon": "🔓",
+        "name": "Jr Penetration Tester",
+        "issuer": "TryHackMe",
+        "badge_class": "cbb",
+        "badge_text": "Completed",
+        "description": {
+          "en": "Web exploitation, network pentesting, privilege escalation.",
+          "fr": "Exploitation web, pentest réseau, élévation de privilèges."
+        }
+      },
+      {
+        "icon": "☁️",
+        "name": "Azure Fundamentals",
+        "issuer": "Microsoft — AZ-900",
+        "badge_class": "cbb",
+        "badge_text": "Certified",
+        "description": {
+          "en": "Cloud foundations — Azure services, security, compliance.",
+          "fr": "Fondamentaux cloud — services Azure, sécurité, conformité."
+        }
+      },
+      {
+        "icon": "⚔️",
+        "name": "Root-Me 100+",
+        "issuer": "Root-Me.org",
+        "badge_class": "cbo",
+        "badge_text": "Active",
+        "description": {
+          "en": "100+ CTF challenges — web, crypto, network, system exploitation.",
+          "fr": "100+ challenges CTF — web, crypto, réseau, exploitation système."
+        }
+      }
+    ]
+  },
+  "nav": {
+    "home": {
+      "en": "Home",
+      "fr": "Accueil"
+    },
+    "experience": {
+      "en": "Experience",
+      "fr": "Expérience"
+    },
+    "projects": {
+      "en": "Projects",
+      "fr": "Projets"
+    },
+    "certifications": {
+      "en": "Certs",
+      "fr": "Certifications"
+    }
+  }
+}
