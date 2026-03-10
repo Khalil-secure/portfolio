@@ -1,0 +1,38 @@
+name: Auto-convert CONTENT.md to content.json
+
+on:
+  push:
+    paths:
+      - 'CONTENT.md'
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run converter
+        run: node convert.js
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add content.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto: Update content.json from CONTENT.md"
+            git push
+          fi
