@@ -9,12 +9,12 @@
   },
   "home": {
     "eyebrow": {
-        "en": "Systeme & Network Engineer",
-        "fr": "Ingénieur Systèmes & Réseaux"
+      "en": "Systeme & Network Engineer",
+      "fr": "Ingénieur Systèmes & Réseaux"
     },
     "tagline": {
-      "en": "DevSecOps · AI Agents · Cloud Security",
-      "fr": "DevSecOps · Agents IA · Sécurité Cloud"
+      "en": "DevSecOps · Agentic AI · Cloud",
+      "fr": "DevSecOps · Agents IA ·  Cloud"
     },
     "name": "Khalil",
     "name_accent": "Ghiati.",
@@ -67,7 +67,14 @@
           "fr": "Chef de Projet Télécom"
         },
         "location": "Lyon, France",
-        "tags": ["5G", "LTE", "FTTH", "ANSSI", "Python", "REST API"],
+        "tags": [
+          "5G",
+          "LTE",
+          "FTTH",
+          "ANSSI",
+          "Python",
+          "REST API"
+        ],
         "bullets": {
           "en": [
             "Automated data collection across <strong>300+ telecom sites</strong> via APIs — <strong>+90% efficiency gain</strong>",
@@ -91,7 +98,12 @@
           "fr": "Ingénieur ML & Chef de Projet"
         },
         "location": "Limoges, France",
-        "tags": ["Python", "PyTorch", "TensorFlow", "Matlab"],
+        "tags": [
+          "Python",
+          "PyTorch",
+          "TensorFlow",
+          "Matlab"
+        ],
         "bullets": {
           "en": [
             "Interactive data visualisation tools (Python, Dash, Plotly)",
@@ -113,7 +125,14 @@
           "fr": "Assistant Responsable Infrastructure IT Régional"
         },
         "location": "Avignon, France",
-        "tags": ["Linux", "Docker", "Centreon", "Hyper-V", "Bash", "CIS"],
+        "tags": [
+          "Linux",
+          "Docker",
+          "Centreon",
+          "Hyper-V",
+          "Bash",
+          "CIS"
+        ],
         "bullets": {
           "en": [
             "Deployed <strong>Centreon</strong> monitoring across <strong>1 200+ endpoints</strong> in Western Europe",
@@ -163,7 +182,13 @@
         "title": "AII — AI as Infrastructure",
         "badge": "badge-ai",
         "badge_label": "AI · DevSecOps",
-        "stack": ["Python", "LangGraph", "Claude API", "ChromaDB", "Docker"],
+        "stack": [
+          "Python",
+          "LangGraph",
+          "Claude API",
+          "ChromaDB",
+          "Docker"
+        ],
         "repo": "https://github.com/Khalil-secure/AI_as_infrastructure",
         "gif": "https://raw.githubusercontent.com/Khalil-secure/AI_as_infrastructure/main/AI_as_infrastructure_demo.gif",
         "description": {
@@ -175,7 +200,12 @@
         "title": "MailGuard — Gmail & Outlook",
         "badge": "badge-sec",
         "badge_label": "Security · Browser",
-        "stack": ["JavaScript", "Chrome API", "NLP", "Phishing Detection"],
+        "stack": [
+          "JavaScript",
+          "Chrome API",
+          "NLP",
+          "Phishing Detection"
+        ],
         "repo": "https://github.com/Khalil-secure/Mailguard_extension_preview",
         "gif": "https://raw.githubusercontent.com/Khalil-secure/Mailguard_extension_preview/main/screenshots/Mailguard_alt_preview.gif",
         "description": {
@@ -187,7 +217,12 @@
         "title": "MailGuard Alternative",
         "badge": "badge-sec",
         "badge_label": "Security · Email",
-        "stack": ["JavaScript", "Chrome API", "Pattern Matching", "Security"],
+        "stack": [
+          "JavaScript",
+          "Chrome API",
+          "Pattern Matching",
+          "Security"
+        ],
         "repo": "https://github.com/Khalil-secure/MailGuard_alternative",
         "gif": "https://raw.githubusercontent.com/Khalil-secure/MailGuard_alternative/main/screenvideo/Mailguard_alt_preview.gif",
         "description": {
