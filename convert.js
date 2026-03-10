@@ -1,72 +1,83 @@
 #!/usr/bin/env node
 /**
- * CONTENT.md → HTML converter
- * Parses markdown and updates index.html with fresh content
- * Also updates content.json for backup/reference
+ * CONTENT.md → content.json converter
+ * Parses markdown and updates JSON with all portfolio content
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const CONTENT_FILE = path.join(__dirname, 'CONTENT.md');
-const HTML_FILE = path.join(__dirname, 'index.html');
 const JSON_FILE = path.join(__dirname, 'content.json');
 
 try {
-  // Read markdown
   const mdContent = fs.readFileSync(CONTENT_FILE, 'utf-8');
-  const mdLines = mdContent.split('\n');
-  
-  // Read current HTML
-  let htmlContent = fs.readFileSync(HTML_FILE, 'utf-8');
-  
-  // Load JSON for structure reference
   const json = JSON.parse(fs.readFileSync(JSON_FILE, 'utf-8'));
-  
-  // Helper: extract value from markdown line
-  const extractMarkdownValue = (mdArray, searchTerm) => {
-    for (let i = 0; i < mdArray.length; i++) {
-      const line = mdArray[i];
-      if (line.includes(searchTerm)) {
-        const match = line.match(/- \*\*[^*]+\*\*:\s*(.+)/);
-        if (match) return match[1].trim();
-      }
-    }
-    return null;
+
+  // Helper: Extract value from markdown pattern: - **Key**: value
+  const extractValue = (content, key) => {
+    const regex = new RegExp(`- \\*\\*${key}\\*\\*:\\s*(.+?)(?=\\n|$)`, 'i');
+    const match = content.match(regex);
+    return match ? match[1].trim() : null;
   };
 
-  // Extract all values from CONTENT.md
-  const eyebrowEN = extractMarkdownValue(mdLines, 'EN Eyebrow');
-  const eyebrowFR = extractMarkdownValue(mdLines, 'FR Eyebrow');
-  const taglineEN = extractMarkdownValue(mdLines, 'EN Tagline');
-  const taglineFR = extractMarkdownValue(mdLines, 'FR Tagline');
-  const availEN = extractMarkdownValue(mdLines, '**EN**:') || 'Open to work';
-  const availFR = extractMarkdownValue(mdLines, '**FR**:') || 'Disponible';
+  // Helper: Extract section content
+  const extractSection = (content, sectionName) => {
+    const sectionRegex = new RegExp(`## ${sectionName}([\\s\\S]*?)(?=##|$)`);
+    const match = content.match(sectionRegex);
+    return match ? match[1] : '';
+  };
 
-  // Update JSON
+  // Parse Personal Info
+  const personalSection = extractSection(mdContent, 'Personal Information');
+  const logoText = extractValue(personalSection, 'Logo Text');
+  const logoSuffix = extractValue(personalSection, 'Logo Suffix');
+  const availEN = extractValue(personalSection, 'EN');
+  const availFR = extractValue(personalSection, 'FR');
+
+  if (logoText) json.personal.logo_text = logoText;
+  if (logoSuffix) json.personal.logo_suffix = logoSuffix;
+  if (availEN) json.availability.en = availEN;
+  if (availFR) json.availability.fr = availFR;
+
+  // Parse Home Section
+  const homeSection = extractSection(mdContent, 'Home Section');
+  const eyebrowEN = extractValue(homeSection, 'EN Eyebrow');
+  const eyebrowFR = extractValue(homeSection, 'FR Eyebrow');
+  const taglineEN = extractValue(homeSection, 'EN Tagline');
+  const taglineFR = extractValue(homeSection, 'FR Tagline');
+  const fullName = extractValue(homeSection, 'Full Name');
+  const accentPart = extractValue(homeSection, 'Accent Part');
+  const gitHub = extractValue(homeSection, 'GitHub');
+  const linkedIn = extractValue(homeSection, 'LinkedIn');
+  const email = extractValue(homeSection, 'Email');
+  const toolStackEN = extractValue(homeSection, 'EN');
+  const toolStackFR = extractValue(homeSection, 'FR');
+
   if (eyebrowEN) json.home.eyebrow.en = eyebrowEN;
   if (eyebrowFR) json.home.eyebrow.fr = eyebrowFR;
   if (taglineEN) json.home.tagline.en = taglineEN;
   if (taglineFR) json.home.tagline.fr = taglineFR;
-  if (availEN) json.availability.en = availEN;
-  if (availFR) json.availability.fr = availFR;
+  if (fullName) json.personal.full_name = fullName;
+  if (accentPart) json.personal.accent_part = accentPart;
+  if (gitHub) json.social.github = gitHub;
+  if (linkedIn) json.social.linkedin = linkedIn;
+  if (email) json.social.email = email;
 
-  // Update HTML content with data attributes for JS to read
-  htmlContent = htmlContent.replace(
-    /data-en="[^"]*".*?>/g,
-    (match) => {
-      // Only update if we have new values
-      return eyebrowEN ? match.replace(/data-en="[^"]*"/, `data-en="${eyebrowEN.replace(/"/g, '&quot;')}"`) : match;
-    }
-  );
+  // Parse description from markdown (multi-line format)
+  const descMatch = homeSection.match(/### Full Description\n([\s\S]*?)(?=###|##|$)/);
+  if (descMatch) {
+    const descBlock = descMatch[1];
+    const enDescMatch = descBlock.match(/\*\*EN\*\*:\s*([\s\S]*?)(?=\n\*\*FR\*\*:|$)/);
+    const frDescMatch = descBlock.match(/\*\*FR\*\*:\s*([\s\S]*?)(?=###|##|$)/);
+    if (enDescMatch) json.home.description.en = enDescMatch[1].trim();
+    if (frDescMatch) json.home.description.fr = frDescMatch[1].trim();
+  }
 
-  // Write updated files
+  // Write updated JSON
   fs.writeFileSync(JSON_FILE, JSON.stringify(json, null, 2));
-  fs.writeFileSync(HTML_FILE, htmlContent);
-
-  console.log('✅ CONTENT.md → HTML + JSON updated successfully!');
-  console.log('📝 Updated eyebrow, tagline, and availability');
-  console.log('🚀 Ready to deploy!');
+  console.log('✅ CONTENT.md → content.json updated successfully!');
+  console.log('📝 Changes will load automatically in your portfolio');
 
 } catch (error) {
   console.error('❌ Conversion error:', error.message);
