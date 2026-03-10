@@ -1,4 +1,4 @@
-name: Auto-convert CONTENT.md to HTML & JSON
+name: Auto-convert CONTENT.md to JSON
 
 on:
   push:
@@ -16,25 +16,29 @@ jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Run converter
         run: node convert.js
 
-      - name: Auto commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Auto: Update content.json from CONTENT.md"
-          commit_user_email: "action@github.com"
-          commit_user_name: "GitHub Action"
-          file_pattern: "content.json"
-          commit_options: "--no-verify"
-          skip_fetch: false
-          skip_checkout: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected"
+          else
+            git add content.json
+            git commit -m "🤖 Auto: Update content.json from CONTENT.md"
+            git push origin HEAD:${{ github.ref }}
+          fi
