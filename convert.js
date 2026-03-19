@@ -290,15 +290,16 @@ function iconType(icon) {
 const certEntries = [...certs.matchAll(/### Certification #\d+[^\n]*\n([\s\S]*?)(?=### Certification #|\n## |$)/g)];
 if (certEntries.length > 0) {
   json.certifications.certs = certEntries.map(m => {
-    const block    = m[1];
-    const icon     = getValue(block, 'Icon');
-    const name     = getValue(block, 'Name');
-    const issuer   = getValue(block, 'Issuer');
-    const badgeRaw = getValue(block, 'Status Badge');
-    const descEN   = getValue(block, 'EN Description');
-    const descFR   = getValue(block, 'FR Description');
+    const block       = m[1];
+    const icon        = getValue(block, 'Icon');
+    const name        = getValue(block, 'Name');
+    const issuer      = getValue(block, 'Issuer');
+    const badgeRaw    = getValue(block, 'Status Badge');
+    const credlyId    = getValue(block, 'Credly Badge ID');
+    const descEN      = getValue(block, 'EN Description');
+    const descFR      = getValue(block, 'FR Description');
 
-    return {
+    const cert = {
       icon,
       icon_type:   icon ? iconType(icon) : 'emoji',
       name,
@@ -307,6 +308,8 @@ if (certEntries.length > 0) {
       badge_text:  badgeRaw ? certBadgeText(badgeRaw)  : '',
       description: { en: descEN, fr: descFR },
     };
+    if (credlyId) cert.credly_badge_id = credlyId;
+    return cert;
   });
 }
 

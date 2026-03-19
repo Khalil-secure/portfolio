@@ -191,6 +191,7 @@ Version alternative allégée de MailGuard avec une approche UI différente et d
 - **Name**: SOC Level 1
 - **Issuer**: TryHackMe
 - **Status Badge**: Certified (green)
+- **Credly Badge ID**: 13015c35-8a42-4d16-9013-dcadee48e781
 - **EN Description**: Blue team operations, threat detection and incident response.
 - **FR Description**: Opérations Blue Team, détection de menaces et réponse aux incidents.
 
