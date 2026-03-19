@@ -285,6 +285,7 @@
         "issuer": "Microsoft — AZ-900",
         "badge_class": "cbb",
         "badge_text": "Certified",
+        "credly_badge_id": "13015c35-8a42-4d16-9013-dcadee48e781",
         "description": {
           "en": "Cloud foundations — Azure services, security, compliance.",
           "fr": "Fondamentaux cloud — services Azure, sécurité, conformité."

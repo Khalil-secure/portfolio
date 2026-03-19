@@ -183,8 +183,8 @@ Version alternative allégée de MailGuard avec une approche UI différente et d
 - **Name**: Engineering Degree
 - **Issuer**: ENSIL-ENSCI — Limoges
 - **Status Badge**: Obtained (green)
-- **EN Description**: Electronics & Telecommunications · 2022-2026. Infrastructure & Security.
-- **FR Description**: Electronique & Télécommunications · 2022-2026. Infrastructure & Sécurité.
+- **EN Description**: Electronics & Telecommunications · 2022-2025. Infrastructure & Security.
+- **FR Description**: Electronique & Télécommunications · 2022-2025. Infrastructure & Sécurité.
 
 ### Certification #2: SOC Level 1
 - **Icon**: tryhackme.png
@@ -198,7 +198,7 @@ Version alternative allégée de MailGuard avec une approche UI différente et d
 - **Icon**: tryhackme.png
 - **Name**: Jr Penetration Tester
 - **Issuer**: TryHackMe
-- **Status Badge**: Completed (blue)
+- **Status Badge**: Active (orange)
 - **EN Description**: Web exploitation, network pentesting, privilege escalation.
 - **FR Description**: Exploitation web, pentest réseau, élévation de privilèges.
 

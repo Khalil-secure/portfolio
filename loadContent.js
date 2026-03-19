@@ -178,12 +178,17 @@ function renderCertifications(lang) {
       ? '<div class="cert-ico-container"><img src="' + cert.icon + '" alt="' + cert.name + '" style="width:80px;height:80px;object-fit:contain"></div>'
       : '<span class="cert-ico">' + cert.icon + '</span>';
 
+    var credlyHtml = cert.credly_badge_id
+      ? '<a href="https://www.credly.com/badges/' + cert.credly_badge_id + '/public_url" target="_blank" class="credly-link">Verify on Credly ↗</a>'
+      : '';
+
     return '<div class="cert-card">' +
       iconHtml +
       '<div class="cert-name">' + cert.name + '</div>' +
       '<div class="cert-iss">' + cert.issuer + '</div>' +
       '<div class="cert-desc">' + cert.description[t] + '</div>' +
       '<span class="cbadge ' + cert.badge_class + '">' + cert.badge_text + '</span>' +
+      credlyHtml +
       '</div>';
   }).join('');
 }
@@ -202,10 +207,11 @@ function renderDemos() {
       ? '<img src="' + d.gif + '" alt="' + d.title + '" loading="lazy">'
       : '<div class="demo-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>' + gifSoon + '</span></div>';
     var tags = d.stack.map(function(s) { return '<span class="demo-tag">' + s + '</span>'; }).join('');
-    var ghBtn = d.repo ? '<a href="' + d.repo + '" target="_blank" class="demo-link demo-link-gh">GitHub</a>' : '';
-    var playBtn = d.repo ? '<a href="' + d.repo + '" target="_blank" class="demo-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>' : '';
+    var ghBtn = d.repo ? '<span class="demo-link demo-link-gh">GitHub ↗</span>' : '';
+    var playBtn = '<div class="demo-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>';
+    var href = d.repo || '#';
 
-    return '<div class="demo-card">' +
+    return '<a href="' + href + '" target="_blank" rel="noreferrer" class="demo-card">' +
       '<div class="demo-thumb">' + thumb + '<span class="demo-badge ' + d.badge + '">' + d.badge_label + '</span>' + playBtn + '</div>' +
       '<div class="demo-body">' +
         '<div class="demo-title">' + d.title + '</div>' +
@@ -213,7 +219,7 @@ function renderDemos() {
         '<div class="demo-stack">' + tags + '</div>' +
         '<div class="demo-links">' + ghBtn + '</div>' +
       '</div>' +
-      '</div>';
+      '</a>';
   }).join('');
 
   window._demosLoaded = true;

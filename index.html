@@ -110,7 +110,7 @@ nav{position:absolute;left:50%;transform:translateX(-50%);display:flex;backgroun
 .toggle-btn.t-demo.active{color:var(--green);border-color:rgba(74,222,128,.2);background:var(--green-dim)}
 .proj-subtitle{font-size:.68rem;color:var(--text3);margin-bottom:20px;font-weight:500;letter-spacing:.3px}
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all .18s;position:relative;overflow:hidden}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all .18s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block}
 .proj-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--green),transparent);opacity:0;transition:opacity .2s}
 .proj-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
 .proj-card:hover::after{opacity:.6}
@@ -126,10 +126,12 @@ nav{position:absolute;left:50%;transform:translateX(-50%);display:flex;backgroun
 .ldot{width:7px;height:7px;border-radius:50%}
 .proj-stars{font-size:.68rem;color:var(--text2)}
 .proj-upd{font-size:.62rem;color:var(--text3);margin-left:auto}
-.deploy-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border:1px solid var(--border2);border-radius:100px;background:transparent;color:var(--text2);font-size:.63rem;font-weight:500;text-decoration:none;transition:all .18s}
+.deploy-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border:1px solid var(--border2);border-radius:100px;background:transparent;color:var(--text2);font-size:.63rem;font-weight:500;text-decoration:none;transition:all .18s;cursor:pointer;font-family:var(--sans)}
+.credly-link{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;border:1px solid rgba(96,165,250,.25);border-radius:6px;font-size:.68rem;font-weight:500;color:var(--blue);text-decoration:none;transition:all .18s}
+.credly-link:hover{background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.4)}
 .deploy-btn:hover{border-color:rgba(74,222,128,.3);color:var(--green)}
 .demos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
-.demo-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .2s}
+.demo-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .2s;text-decoration:none;color:inherit;display:block}
 .demo-card:hover{border-color:var(--border2);box-shadow:var(--shadow2)}
 .demo-thumb{position:relative;height:190px;background:linear-gradient(135deg,var(--bg3) 0%,var(--bg4) 100%);border-bottom:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center}
 .demo-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
@@ -385,12 +387,15 @@ function fetchRepos() {
 function renderRepos() {
   var grid = document.getElementById('proj-grid');
   allRepos.slice(shown, shown + PER).forEach(function(repo) {
-    var card = document.createElement('div');
+    var card = document.createElement('a');
     card.className = 'proj-card';
-    var db = (repo.homepage && repo.homepage.startsWith('http')) ? '<a href="' + repo.homepage + '" target="_blank" rel="noreferrer" class="deploy-btn" onclick="event.stopPropagation()">live</a>' : '';
+    card.href = repo.html_url;
+    card.target = '_blank';
+    card.rel = 'noreferrer';
+    var db = (repo.homepage && repo.homepage.startsWith('http')) ? '<button class="deploy-btn" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.url,\'_blank\')" data-url="' + repo.homepage + '">live ↗</button>' : '';
     var lang = repo.language ? '<div class="proj-lang"><span class="ldot" style="background:' + (LC[repo.language] || '#7d8fa3') + '"></span>' + repo.language + '</div>' : '';
     var stars = repo.stargazers_count > 0 ? '<div class="proj-stars">★ ' + repo.stargazers_count + '</div>' : '';
-    card.innerHTML = '<a href="' + repo.html_url + '" target="_blank" rel="noreferrer" class="proj-link"><div class="proj-head"><div class="proj-name">' + repo.name + '</div><div class="proj-arr">↗</div></div><div class="proj-desc">' + (repo.description || 'No description provided.') + '</div></a><div class="proj-meta">' + lang + stars + '<div class="proj-upd">Updated ' + ago(repo.updated_at) + '</div>' + db + '</div>';
+    card.innerHTML = '<div class="proj-head"><div class="proj-name">' + repo.name + '</div><div class="proj-arr">↗</div></div><div class="proj-desc">' + (repo.description || 'No description provided.') + '</div><div class="proj-meta">' + lang + stars + '<div class="proj-upd">Updated ' + ago(repo.updated_at) + '</div>' + db + '</div>';
     grid.appendChild(card);
   });
   shown += PER;
