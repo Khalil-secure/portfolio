@@ -1,6 +1,6 @@
 {
   "personal": {
-    "logo_text": "khalil",
+    "logo_text": "test",
     "logo_suffix": ".sec"
   },
   "availability": {
@@ -9,18 +9,18 @@
   },
   "home": {
     "eyebrow": {
-      "en": "Systeme & Network Engineer",
-      "fr": "Ingénieur Systèmes & Réseaux"
+      "en": "Systems & Network Engineer | SOC Analyst",
+      "fr": "Ingénieur Systèmes & Réseaux | Analyste SOC"
     },
     "tagline": {
-      "en": "DevSecOps · Agentic AI · Cloud",
-      "fr": "DevSecOps · Agents IA ·  Cloud"
+      "en": "Cybersecurity · DevSecOps · Agentic AI",
+      "fr": "Cybersécurité · DevSecOps · Agents IA"
     },
     "name": "Khalil",
     "name_accent": "Ghiati.",
     "description": {
-      "en": "Engineering graduate specialised in <strong>AI-driven infrastructure</strong> and <strong>cybersecurity</strong>. I build systems where <strong>AI is a first-class infrastructure component</strong> — not a plugin. From <strong>5G telecom at Bouygues</strong> to <strong>LLM agents monitoring production Docker environments</strong>.",
-      "fr": "Ingénieur spécialisé en <strong>infrastructure pilotée par IA</strong> et <strong>cybersécurité</strong>. Je construis des systèmes où <strong>l'IA est un composant d'infrastructure de premier plan</strong> — pas un plugin. Du <strong>5G chez Bouygues Telecom</strong> aux <strong>agents LLM qui supervisent des environnements Docker en production</strong>."
+      "en": "Engineering graduate specialised in <strong>cybersecurity</strong> and <strong>AI-driven infrastructure</strong>. I investigate security incidents, triage alerts, and build systems where <strong>AI enhances threat detection</strong> — not just as a plugin, but as a core component. From <strong>5G telecom at Bouygues</strong> to <strong>SOC operations and LLM agents monitoring production environments</strong>.",
+      "fr": "Ingénieur spécialisé en <strong>cybersécurité</strong> et <strong>infrastructure pilotée par IA</strong>. J'analyse les incidents de sécurité, trie les alertes et construis des systèmes où <strong>l'IA renforce la détection des menaces</strong> — pas comme un plugin, mais comme un composant central. Du <strong>5G chez Bouygues Telecom</strong> aux <strong>opérations SOC et agents LLM supervisant des environnements en production</strong>."
     },
     "socials": [
       {
@@ -250,8 +250,8 @@
         "badge_class": "cbg",
         "badge_text": "Obtained",
         "description": {
-          "en": "Electronics & Telecommunications · 2022-2026. Infrastructure & Security.",
-          "fr": "Electronique & Télécommunications · 2022-2026. Infrastructure & Sécurité."
+          "en": "Electronics & Telecommunications · 2022-2025. Infrastructure & Security.",
+          "fr": "Electronique & Télécommunications · 2022-2025. Infrastructure & Sécurité."
         }
       },
       {
@@ -264,15 +264,16 @@
         "description": {
           "en": "Blue team operations, threat detection and incident response.",
           "fr": "Opérations Blue Team, détection de menaces et réponse aux incidents."
-        }
+        },
+        "credly_badge_id": "13015c35-8a42-4d16-9013-dcadee48e781"
       },
       {
         "icon": "tryhackme.png",
         "icon_type": "image",
         "name": "Jr Penetration Tester",
         "issuer": "TryHackMe",
-        "badge_class": "cbb",
-        "badge_text": "Completed",
+        "badge_class": "cbo",
+        "badge_text": "Active",
         "description": {
           "en": "Web exploitation, network pentesting, privilege escalation.",
           "fr": "Exploitation web, pentest réseau, élévation de privilèges."
@@ -285,7 +286,6 @@
         "issuer": "Microsoft — AZ-900",
         "badge_class": "cbb",
         "badge_text": "Certified",
-        "credly_badge_id": "13015c35-8a42-4d16-9013-dcadee48e781",
         "description": {
           "en": "Cloud foundations — Azure services, security, compliance.",
           "fr": "Fondamentaux cloud — services Azure, sécurité, conformité."
