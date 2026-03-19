@@ -1,33 +1,33 @@
 # Portfolio Content
-
+ 
 ## Personal Information
-
+ 
 ### Logo
-- **Logo Text**: lol
+- **Logo Text**: khalil
 - **Logo Suffix**: .sec
-
+ 
 ### Availability Status  
 - **EN**: open to work
 - **FR**: disponible
-
+ 
 ---
-
+ 
 ## Home Section
-
+ 
 ### Short Bio
-- **EN Eyebrow**: Systeme & Network Engineer
-- **EN Tagline**: DevSecOps · Agentic AI · Cloud 
-- **FR Eyebrow**: Ingénieur Systèmes & Réseaux
-- **FR Tagline**: DevSecOps · Agents IA ·  Cloud
-
+- **EN Eyebrow**: Systems & Network Engineer | SOC Analyst
+- **EN Tagline**: Cybersecurity · DevSecOps · Agentic AI
+- **FR Eyebrow**: Ingénieur Systèmes & Réseaux | Analyste SOC
+- **FR Tagline**: Cybersécurité · DevSecOps · Agents IA
+ 
 ### Name
 - **Full Name**: Khalil Ghiati.
 - **Accent Part**: Ghiati. (styled in italics)
-
+ 
 ### Full Description
-**EN**: Engineering graduate specialised in **AI-driven infrastructure** and **cybersecurity**. I build systems where **AI is a first-class infrastructure component** — not a plugin. From **5G telecom at Bouygues** to **LLM agents monitoring production Docker environments**.
-
-**FR**: Ingénieur spécialisé en **infrastructure pilotée par IA** et **cybersécurité**. Je construis des systèmes où **l'IA est un composant d'infrastructure de premier plan** — pas un plugin. Du **5G chez Bouygues Telecom** aux **agents LLM qui supervisent des environnements Docker en production**.
+**EN**: Engineering graduate specialised in **cybersecurity** and **AI-driven infrastructure**. I investigate security incidents, triage alerts, and build systems where **AI enhances threat detection** — not just as a plugin, but as a core component. From **5G telecom at Bouygues** to **SOC operations and LLM agents monitoring production environments**.
+ 
+**FR**: Ingénieur spécialisé en **cybersécurité** et **infrastructure pilotée par IA**. J'analyse les incidents de sécurité, trie les alertes et construis des systèmes où **l'IA renforce la détection des menaces** — pas comme un plugin, mais comme un composant central. Du **5G chez Bouygues Telecom** aux **opérations SOC et agents LLM supervisant des environnements en production**.
 
 ### Social Links
 - **GitHub**: https://github.com/Khalil-secure
