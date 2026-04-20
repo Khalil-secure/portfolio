@@ -37,11 +37,6 @@
         "label": "Email",
         "url": "mailto:medkhalilghiati@gmail.com",
         "icon": "email"
-      },
-      {
-        "label": "Resume",
-        "url": "khalil-ghiati-cv-fr.pdf",
-        "icon": "resume"
       }
     ],
     "stack_label": {

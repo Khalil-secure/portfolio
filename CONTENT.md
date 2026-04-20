@@ -33,7 +33,6 @@
 - **GitHub**: https://github.com/Khalil-secure
 - **LinkedIn**: https://www.linkedin.com/in/mohamed-ghiati-khalil/
 - **Email**: medkhalilghiati@gmail.com
-- **Resume PDF**: khalil-ghiati-cv-fr.pdf
 
 ### Tool Stack Label
 - **EN**: Tool stack
